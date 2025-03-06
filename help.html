@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jumia Help Center</title>
+    <style>
+        body {
+    font-family: sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+header {
+    background-color: #f8f8f8;
+    padding: 10px 20px;
+}
+
+.top-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-bottom: 10px;
+}
+
+.sell-link {
+    color: #ff9800;
+    text-decoration: none;
+}
+
+.jumia-pay {
+    font-weight: bold;
+}
+
+.main-header {
+    display: flex;
+    align-items: center;
+}
+
+.logo-menu {
+    display: flex;
+    align-items: center;
+}
+
+.menu-icon {
+    font-size: 24px;
+    margin-right: 10px;
+    cursor: pointer;
+}
+
+.logo {
+    font-size: 24px;
+    font-weight: bold;
+    color: #ff9800;
+}
+
+.star {
+    font-size: 1.5em;
+    vertical-align: middle;
+}
+
+.search-bar {
+    flex-grow: 1;
+    margin: 0 20px;
+    display: flex;
+}
+
+.search-bar input {
+    flex-grow: 1;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 5px 0 0 5px;
+}
+
+.search-button {
+    background-color: #ff9800;
+    color: white;
+    border: none;
+    padding: 8px 15px;
+    border-radius: 0 5px 5px 0;
+    cursor: pointer;
+}
+
+.header-links a {
+    margin-left: 15px;
+    text-decoration: none;
+    color: #333;
+}
+
+.help-center {
+    padding: 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.help-center h2 {
+    margin-bottom: 10px;
+}
+
+.quick-links {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+
+.quick-link {
+    text-align: center;
+    cursor: pointer;
+}
+
+.quick-link img {
+    width: 50px;
+    height: 50px;
+    margin-bottom: 5px;
+}
+
+.search-input {
+    margin-bottom: 20px;
+}
+
+.search-input input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.left-panel {
+    width: 200px;
+    float: left;
+}
+
+.panel-item {
+    padding: 10px;
+    border-bottom: 1px solid #eee;
+    cursor: pointer;
+}
+
+.right-panel {
+    margin-left: 220px;
+}
+
+.panel-content {
+    padding: 10px;
+}
+
+.panel-title {
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.panel-question {
+    padding: 8px;
+    border-bottom: 1px solid #eee;
+    cursor: pointer;
+}
+
+.chat-button {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background-color: #ff9800;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+/* Chat Box Styles */
+.chat-box {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    width: 300px;
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    display: none; /* Initially hidden */
+}
+
+.chat-header {
+    background-color: #ff9800; /* Orange background */
+    color: white;
+    padding: 15px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo {
+    font-weight: bold;
+    font-size: 1.2em;
+}
+
+.star {
+    font-size: 1.5em;
+    vertical-align: middle;
+}
+
+.expand-button {
+    background: none;
+    border: none;
+    color: white;
+    font-size: 1.5em;
+    cursor: pointer;
+}
+
+.chat-content {
+    padding: 20px;
+    text-align: center;
+}
+
+.welcome-message {
+    font-size: 1.1em;
+    margin-bottom: 20px;
+}
+
+.conversation-prompt {
+    background-color: #f9f9f9;
+    padding: 20px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+}
+
+.prompt-text {
+    margin-bottom: 15px;
+}
+
+.new-conversation-button {
+    background-color: #ff9800;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    width: 100%;
+   
+}
+.new-conversation-button a{
+    text-decoration: none;
+}
+
+/* Chat Interface */
+.chat-interface {
+    display: none;
+    width: 300px;
+    height: 400px;
+    border: 1px solid #ccc;
+    margin-top: 10px;
+}
+
+.chat-messages {
+    height: 300px;
+    overflow-y: scroll;
+    padding: 10px;
+}
+
+.message {
+    margin-bottom: 10px;
+    padding: 8px 12px;
+    border-radius: 5px;
+    max-width: 70%;
+}
+
+.user {
+    background-color: #eee;
+    text-align: right;
+    align-self: flex-end;
+}
+
+.bot {
+    background-color: #ff9800;
+    color: white;
+}
+
+.chat-input {
+    padding: 10px;
+}
+
+#user-input {
+    width: calc(100% - 70px);
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+#send-button {
+    width: 60px;
+    padding: 8px;
+    background-color: #ff9800;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    text-decoration: none;
+}
+    </style>
+</head>
+<body>
+    <header>
+        <div class="top-bar">
+            <a href="#" class="sell-link">Sell on Jumia</a>
+            <span class="jumia-pay">BROMAC PAY</span>
+        </div>
+        <div class="main-header">
+            <div class="logo-menu">
+                <div class="menu-icon">&#9776;</div>
+                <div class="logo">BROMAC<span class="star">&#9734;</span></div>
+            </div>
+            <div class="search-bar">
+                <input type="text" placeholder="Search products, brands and categories">
+                <button class="search-button">Search</button>
+            </div>
+            <div class="header-links">
+                <a href="login.html">Account</a>
+                <a href="help.html">Help</a>
+                <a href="#">Cart</a>
+            </div>
+        </div>
+    </header>
+
+    <div class="help-center">
+        <h2>Help Center</h2>
+        <p>Hi, how can we help you?</p>
+        <div class="quick-links">
+            </div>
+        <div class="search-input">
+            <input type="text" placeholder="Type keywords like 'return'">
+        </div>
+        <div class="left-panel">
+            <div class="panel-item">Payments</div>
+            <div class="panel-item">Lipa Pole Pole</div>
+            <div class="panel-item">Vouchers</div>
+        </div>
+        <div class="right-panel">
+            <div class="panel-content">
+                <div class="panel-title">Payments</div>
+                <div class="panel-question">What payment methods are accepted on Jumia?</div>
+                <div class="panel-question">How secure is my payment information on Jumia?</div>
+            </div>
+        </div>
+    </div>
+
+    <button class="chat-button">Chat with us</button>
+
+    <div class="chat-box">
+        <div class="chat-header">
+            <div class="logo">JUMIA<span class="star">&#9734;</span></div>
+            <button class="expand-button">&#9660;</button>
+        </div>
+        <div class="chat-content">
+            <div class="welcome-message">
+                Welcome! <br> How can we help you?
+            </div>
+            <div class="conversation-prompt">
+                <div class="prompt-text">
+                    Start a conversation with our team of experts now!
+                </div>
+            </div>
+            <button class="new-conversation-button">New Conversation</button>
+        </div>
+        <div class="chat-interface">
+            <div class="chat-messages">
+            </div>
+            <div class="chat-input">
+                <input type="text" id="user-input" placeholder="Type your message...">
+                <button id="send-button">Send</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const chatButton = document.querySelector('.chat-button');
+            const expandButton = document.querySelector('.expand-button');
+            const chatContent = document.querySelector('.chat-content');
+            const newConversationButton = document.querySelector('.new-conversation-button');
+            const chatInterface = document.querySelector('.chat-interface');
+            const userInput = document.getElementById('user-input');
+            const sendButton = document.getElementById('send-button');
+            const chatMessages = document.querySelector('.chat-messages');
+
+            chatButton.addEventListener('click', function() {
+                // Instead of linking to a separate page, show the chat box
+                document.querySelector('.chat-box').style.display = 'block';
+            });
+
+            expandButton.addEventListener('click', function() {
+                if (chatContent.style.display === 'none' || chatContent.style.display === '') {
+                    chatContent.style.display = 'block';
+                    chatInterface.style.display = 'none';
+                    expandButton.innerHTML = '&#9650;';
+                } else {
+                    chatContent.style.display = 'none';
+                    expandButton.innerHTML = '&#9660;';
+                }
+            });
+
+            newConversationButton.addEventListener('click', function() {
+                chatInterface.style.display = 'block';
+                chatContent.style.display = 'none';
+            });
+
+            sendButton.addEventListener('click', function() {
+                const userMessage = userInput.value;
+                displayMessage(userMessage, 'user');
+                userInput.value = '';
+
+                const aiResponse = getAIResponse(userMessage);
+                setTimeout(function() {
+                    displayMessage(aiResponse, 'bot');
+                }, 500);
+            });
+
+            function displayMessage(message, sender) {
+                const messageElement = document.createElement('div');
+                messageElement.classList.add('message', sender);
+                messageElement.textContent = message;
+                chatMessages.appendChild(messageElement);
+            }
+
+            function getAIResponse(userMessage) {
+                userMessage = userMessage.toLowerCase();
+                if (userMessage.includes('hello') || userMessage.includes('hi')) {
+                    return 'Hello there! How can I help you today?';
+                } else if (userMessage.includes('product')) {
+                    return 'We have a wide variety of products. What are you interested in?';
+                } else if (userMessage.includes('delivery')) {
+                    return 'Delivery times depend on your location. Where are you located?';
+                } else {
+                    return "I'm still learning. Can you rephrase your question?";
+                }
+            }
+        });
+    </script>
+</body>
+</html>

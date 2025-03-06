@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BROMAC Live Chat</title>
+    <style>
+        body {
+            font-family: sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f0f0f0;
+        }
+
+        .chat-box {
+            width: 300px;
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+        }
+
+        .chat-header {
+            background-color: #ff9800;
+            color: white;
+            padding: 15px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-weight: bold;
+            font-size: 1.2em;
+        }
+
+        .star {
+            font-size: 1.5em;
+            vertical-align: middle;
+        }
+
+        .expand-button {
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.5em;
+            cursor: pointer;
+        }
+
+        .chat-content {
+            padding: 20px;
+            text-align: center;
+        }
+
+        .welcome-message {
+            font-size: 1.1em;
+            margin-bottom: 20px;
+        }
+
+        .conversation-prompt {
+            background-color: #f9f9f9;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+        }
+
+        .prompt-text {
+            margin-bottom: 15px;
+        }
+
+        .new-conversation-button {
+            background-color: #ff9800;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            width: 100%;
+        }
+
+        /* Chat Interface */
+        .chat-interface {
+            display: none; /* Initially hidden */
+            width: 300px;
+            height: 400px;
+            border: 1px solid #ccc;
+            margin-top: 10px;
+        }
+
+        .chat-messages {
+            height: 300px;
+            overflow-y: scroll;
+            padding: 10px;
+        }
+
+        .message {
+            margin-bottom: 10px;
+            padding: 8px 12px;
+            border-radius: 5px;
+            max-width: 70%;
+        }
+
+        .user {
+            background-color: #eee;
+            text-align: right;
+            align-self: flex-end;
+        }
+
+        .bot {
+            background-color: #ff9800;
+            color: white;
+        }
+
+        .chat-input {
+            padding: 10px;
+        }
+
+        #user-input {
+            width: calc(100% - 70px);
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        #send-button {
+            width: 60px;
+            padding: 8px;
+            background-color: #ff9800;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div class="chat-box">
+        <div class="chat-header">
+            <div class="logo">BROMAC<span class="star">&#9734;</span></div>
+            <button class="expand-button">&#9660;</button>
+        </div>
+        <div class="chat-content">
+            <div class="welcome-message">
+                Welcome! <br> How can we help you?
+            </div>
+            <div class="conversation-prompt">
+                <div class="prompt-text">
+                    Start a conversation with our team of experts now!
+                </div>
+            </div>
+            <button class="new-conversation-button">New Conversation</button>
+        </div>
+        <div class="chat-interface">
+            <div class="chat-messages">
+            </div>
+            <div class="chat-input">
+                <input type="text" id="user-input" placeholder="Type your message...">
+                <button id="send-button">Send</button>
+            </div>
+        </div>
+    </div>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const expandButton = document.querySelector('.expand-button');
+            const chatContent = document.querySelector('.chat-content');
+            const newConversationButton = document.querySelector('.new-conversation-button');
+            const chatInterface = document.querySelector('.chat-interface');
+            const userInput = document.getElementById('user-input');
+            const sendButton = document.getElementById('send-button');
+            const chatMessages = document.querySelector('.chat-messages');
+
+            expandButton.addEventListener('click', function() {
+                if (chatContent.style.display === 'none' || chatContent.style.display === '') {
+                    chatContent.style.display = 'block';
+                    chatInterface.style.display = 'none';
+                    expandButton.innerHTML = '&#9650;';
+                } else {
+                    chatContent.style.display = 'none';
+                    expandButton.innerHTML = '&#9660;';
+                }
+            });
+
+            newConversationButton.addEventListener('click', function() {
+                chatInterface.style.display = 'block';
+                chatContent.style.display = 'none';
+            });
+
+            sendButton.addEventListener('click', function() {
+                const userMessage = userInput.value;
+                displayMessage(userMessage, 'user');
+                userInput.value = '';
+
+                const aiResponse = getAIResponse(userMessage);
+                setTimeout(function() {
+                    displayMessage(aiResponse, 'bot');
+                }, 500);
+            });
+
+            function displayMessage(message, sender) {
+                const messageElement = document.createElement('div');
+                messageElement.classList.add('message', sender);
+                messageElement.textContent = message;
+                chatMessages.appendChild(messageElement);
+            }
+
+            function getAIResponse(userMessage) {
+                userMessage = userMessage.toLowerCase();
+                if (userMessage.includes('hello') || userMessage.includes('hi')) {
+                    return 'Hello there! How can I help you today?';
+                } else if (userMessage.includes('product')) {
+                    return 'We have a wide variety of products. What are you interested in?';
+                } else if (userMessage.includes('delivery')) {
+                    return 'Delivery times depend on your location. Where are you located?';
+                } else {
+                    return "I'm still learning. Can you rephrase your question?";
+                }
+            }
+        });
+    </script>
+</body>
+</html>

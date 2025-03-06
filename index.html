@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BROMAC - Online Shopping</title>
+    <style>
+        /* Theme Color Variables */
+        :root {
+            --primary-color: #ff6600; /* Orange theme */
+            --secondary-color: #f0f0f0;
+            --text-color: #333;
+            --white-color: #fff;
+            --discount-color: #FF5722; /* Orange discount color */
+        }
+
+        body {
+            font-family: sans-serif;
+            margin: 0;
+            padding: 0;
+            color: var(--text-color);
+        }
+
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 20px;
+            background-color: var(--secondary-color);
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+            color: var(--primary-color); /* Logo color */
+        }
+
+        .search-bar {
+            display: flex;
+            flex-grow: 1;
+            margin: 0 20px;
+        }
+
+        .search-bar input {
+            flex-grow: 1;
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 5px 0 0 5px;
+        }
+
+        .search-bar button {
+            background-color: var(--primary-color);
+            color: var(--white-color);
+            border: none;
+            padding: 8px 15px;
+            border-radius: 0 5px 5px 0;
+            cursor: pointer;
+        }
+
+        nav a {
+            margin-left: 15px;
+            text-decoration: none;
+            color: var(--text-color);
+        }
+
+        .hero {
+            background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('placeholder-product.jpg'); /* Replace with your image */
+            background-size: cover;
+            background-position: center;
+            color: var(--white-color);
+            text-align: center;
+            padding: 100px 0;
+        }
+
+        .hero-content {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .hero h1 {
+            font-size: 36px;
+            margin-bottom: 10px;
+        }
+
+        .shop-now {
+            background-color: var(--primary-color);
+            color: var(--white-color);
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s ease, transform 0.2s ease; /* Smooth transition and transform */
+        }
+
+        .shop-now:hover {
+            background-color: #ff5500; /* Slightly darker orange on hover */
+            transform: translateY(-3px); /* Slightly lift the button */
+        }
+
+        .categories {
+            padding: 20px;
+            text-align: center;
+        }
+
+        .category-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 10px;
+            margin-top: 20px;
+        }
+
+        .category-item {
+            background-color: #fffbf8;
+            padding: 15px;
+            border-radius: 5px;
+            border: 1px solid #ff6000;
+            cursor: pointer;
+            transition: background-color 0.3s ease; /* Smooth transition */
+        }
+
+        .category-item:hover {
+            background-color: #ff6000; /* Hover color */
+            color: var(--white-color);
+        }
+
+        .top-picks {
+            padding: 20px;
+            text-align: center;
+            margin-left: 60px;
+        }
+
+        .product-carousel {
+            display: flex;
+            overflow-x: auto;
+            gap: 10px;
+            padding: 20px 0;
+        }
+
+        .product {
+            border: 1px solid #ddd;
+            padding: 10px;
+            text-align: center;
+            width: 200px;
+        }
+
+        .product img {
+            max-width: 100%;
+            height: auto;
+        }
+
+        .original-price {
+            text-decoration: line-through;
+            color: #888;
+        }
+
+        .discount {
+            background-color: var(--discount-color);
+            color: var(--white-color);
+            padding: 3px 5px;
+            border-radius: 3px;
+            font-size: 12px;
+        }
+
+        footer {
+            background-color: #333;
+            color: #fff;
+            padding: 40px 20px;
+        }
+
+        .footer-content {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-around;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .footer-section {
+            width: 20%;
+            min-width: 180px;
+            margin-bottom: 20px;
+        }
+
+        .footer-section h4 {
+            margin-bottom: 15px;
+            font-size: 1.2em;
+        }
+
+        .footer-section ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .footer-section li {
+            margin-bottom: 8px;
+        }
+
+        .footer-section a {
+            color: #ccc;
+            text-decoration: none;
+        }
+
+        .footer-section a:hover {
+            color: #fff;
+        }
+
+        .payment-brands .payment-methods,
+        .payment-brands .featured-brands {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            margin-top: 10px;
+        }
+
+        .payment-brands img {
+            max-height: 30px;
+            margin: 5px;
+            border-radius: 15px;
+            border: 1px solid #226fff;
+        }
+
+        .social-links {
+            text-align: center;
+            margin-top: 30px;
+        }
+
+        .social-icon {
+            display: inline-flex;
+            justify-content: center;
+            align-items: center;
+            width: 40px;
+            height: 40px;
+            background-color: #555;
+            color: #fff;
+            border-radius: 50%;
+            margin: 0 10px;
+            text-decoration: none;
+        }
+
+        .social-icon:hover {
+            background-color: #777;
+        }
+
+        .copyright {
+            text-align: center;
+            margin-top: 20px;
+            border-top: 1px solid #555;
+            padding-top: 20px;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .footer-section {
+                width: 45%;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .footer-section {
+                width: 100%;
+            }
+        }
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+</head>
+<body>
+    <header>
+        <div class="logo">BROMAC</div>
+        <div class="search-bar">
+            <input type="text" placeholder="Search products, brands, and categories">
+            <button><i class="fas fa-search"></i></button>
+        </div>
+        <nav>
+            <a href="login.html">Account</a>
+            <a href="help.html">Help</a>
+            <a href="#" class="cart">Cart (<span id="cart-count">0</span>)</a>
+        </nav>
+    </header>
+
+    <section class="hero">
+        <div class="hero-content">
+            <h1>New Arrivals</h1>
+            <p>Up to 40% OFF</p>
+            <button class="shop-now">Shop Now</button>
+        </div>
+    </section>
+
+    <section class="categories">
+        <h2>Categories</h2>
+        <div class="category-grid">
+            <div class="category-item">Phone Accessories</div>
+            <div class="category-item">Men's Clothing</div>
+            <div class="category-item">Shoes</div>
+            <div class="category-item">Women's Fashion</div>
+            <div class="category-item">Women's Bags</div>
+            <div class="category-item">Beauty</div>
+            <div class="category-item">Home Office</div>
+            <div class="category-item">Electronic Accessories</div>
+        </div>
+    </section>
+
+    <section class="top-picks">
+        <h2>Top Picks</h2>
+        <div class="product-carousel">
+            <div class="product">
+                <img src="pics/DAMMY.jpg" alt="Product 1">
+                <h3>Product 1</h3>
+                <p><span class="original-price">$50</span> $33</p>
+                <span class="discount">34% OFF</span>
+            </div>
+             <div class="product">
+                <img src="pics/male-mannequins.jpg" alt="Product 2">
+                <h3>Product 2</h3>
+                <p><span class="original-price">$100</span> $94</p>
+                <span class="discount">6% OFF</span>
+            </div>
+             <div class="product">
+                <img src="pics/red-hand-bag-1.jpg" alt="Product 3">
+                <h3>Product 3</h3>
+                <p><span class="original-price">$75</span> $60</p>
+                <span class="discount">20% OFF</span>
+            </div>
+             <div class="product">
+                <img src="pics/white-casual-shoes-for-men.jpg" alt="Product 4">
+                <h3>Product 4</h3>
+                <p><span class="original-price">$75</span> $60</p>
+                <span class="discount">20% OFF</span>
+            </div>
+            <div class="product">
+                <img src="pics/smooth-5s-ai-combo.jpeg" alt="Product 5">
+                <h3>Product 5</h3>
+                <p><span class="original-price">$75</span> $60</p>
+                <span class="discount">20% OFF</span>
+            </div>
+</SEction>
+            <footer>
+                <div class="footer-content">
+                    <div class="footer-section">
+                        <h4>Help & Support</h4>
+                        <ul>
+                            <li><a href="chatbox.html">Live Chat</a></li>
+                            <li><a href="help.html">Help Center</a></li>
+                            <li><a href="#">Contact Support</a></li>
+                        </ul>
+                    </div>
+                    <div class="footer-section">
+                        <h4>Useful Links</h4>
+                        <ul>
+                            <li><a href="#">Order Tracking</a></li>
+                            <li><a href="#">Delivery Information</a></li>
+                            <li><a href="#">Returns & Refunds</a></li>
+                            <li><a href="#">FAQs</a></li>
+                        </ul>
+                    </div>
+                    <div class="footer-section">
+                        <h4>About Us</h4>
+                        <ul>
+                            <li><a href="#">Company Information</a></li>
+                            <li><a href="#">Careers</a></li>
+                            <li><a href="#">Terms & Conditions</a></li>
+                            <li><a href="#">Privacy Policy</a></li>
+                        </ul>
+                    </div>
+                    <div class="footer-section">
+                        <h4>Make Money with Us</h4>
+                        <ul>
+                            <li><a href="#">Sell on Our Platform</a></li>
+                            <li><a href="#">Sales Consultant</a></li>
+                            <li><a href="#">City Partner</a></li>
+                        </ul>
+                    </div>
+                    <div class="footer-section">
+                        <h4>BROMAC International</h4>
+                        <ul>
+                            <li><a href="#">kenya</a></li>
+                            <li><a href="#">Tanzania</a></li>
+                            <li><a href="#">Uganda</a></li>
+                        </ul>
+                    </div>
+                    <div class="footer-section payment-brands">
+                        <h4>Payment Methods</h4>
+                        <div class="payment-methods">
+                            <img src="payment1.png" alt="Payment 1">
+                            <img src="payment2.png" alt="Payment 2">
+                        </div>
+                        <div class="featured-brands">
+                            <img src="pics/kcb.PNG" alt="Brand 1">
+                            <img src="pics/pp.png" alt="Brand 2">
+                        </div>
+                    </div>
+                </div>
+                <div class="social-links">
+                    <a href="#" class="social-icon"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#" class="social-icon"><i class="fab fa-twitter"></i></a>
+                    <a href="#" class="social-icon"><i class="fab fa-instagram"></i></a>
+                </div>
+                <div class="copyright">
+                    <p>&copy; 2024 Your E-commerce Platform. All rights reserved.</p>
+                </div>
+            </footer>
